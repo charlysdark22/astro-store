@@ -1,0 +1,22 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<header class="sticky top-0 z-40 w-full border-b bg-background/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/60">
+  <div class="container flex h-14 items-center">
+    <a href="/" class="mr-6 flex items-center space-x-2">
+      <span class="font-bold">Mi Tienda Astro</span>
+    </a>
+    <nav class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+      <div class="w-full flex-1 md:w-auto md:flex-none">
+        {/* Aquí irían los enlaces de navegación, como Inicio, Productos, etc. */}
+      </div>
+      <nav class="flex items-center space-x-4">
+        <a href="/login" class="text-sm font-medium transition-colors hover:text-primary">Login</a>
+        <a href="/register" class="text-sm font-medium transition-colors hover:text-primary">Registro</a>
+        {/* Aquí iría el selector de idioma */}
+        <ThemeToggle />
+      </nav>
+    </nav>
+  </div>
+</header>

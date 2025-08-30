@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Welcome from '../components/Welcome.astro';
+import { db } from '../lib/database';
+
+const products = await db.products.findMany();
+---
+
+<Layout>
+  <main class="container mx-auto px-4">
+    <Welcome />
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {products.map(product => <ProductCard product={product} />)}
+    </div>
+  </main>
+</Layout>
