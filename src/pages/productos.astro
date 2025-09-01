@@ -1,0 +1,40 @@
+---
+// src/pages/productos.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { supabase } from '../lib/supabase';
+
+const title = "Todos los Productos";
+
+// Carga los productos desde Supabase
+const { data: productos, error } = await supabase
+  .from('productos')
+  .select('*')
+  .order('precio', { ascending: true });
+
+if (error) {
+  console.error('Error cargando productos:', error);
+}
+---
+
+<Layout title={title}>
+  <Header />
+
+  <main class="container mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-gray-800 mb-8">Nuestros Productos</h1>
+
+    {error && (
+      <p class="text-red-600">Hubo un error cargando los productos. Intenta más tarde.</p>
+    )}
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {productos?.map((producto) => (
+        <ProductCard producto={producto} />
+      ))}
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

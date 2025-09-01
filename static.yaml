@@ -1,0 +1,8 @@
+# static.yaml
+services:
+  - type: web
+    name: astro-store
+    buildCommand: npm run build
+    publishPath: dist
+    env: static
+    plan: free

@@ -1,0 +1,89 @@
+---
+// src/pages/acerca.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "¿Cómo funcionan los productos? - 3 EN 1 TECNO";
+---
+
+<Layout title={title}>
+  <Header />
+
+  <main class="container mx-auto px-4 py-10 max-w-4xl">
+    <h1 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">
+      🔧 ¿Para qué sirve cada producto?
+    </h1>
+    <p class="text-center text-lg text-gray-600 mb-12">
+      Te explicamos cada uno para que compres con confianza.
+    </p>
+
+    <!-- Producto 1 -->
+    <section class="bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-blue-500">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-3">💾 Cajita para Disco de Laptop/SSD</h2>
+      <img src="https://placehold.co/400x200/gray/white?text=Cajita+USB" alt="Cajita USB" class="w-full md:w-1/2 rounded-lg mb-4" />
+      <h3 class="font-bold text-gray-700 mb-2">¿Qué es?</h3>
+      <p class="text-gray-700 mb-4">
+        Es un <strong>adaptador USB</strong> que convierte tu disco duro o SSD interno en una unidad externa.
+      </p>
+      <h3 class="font-bold text-gray-700 mb-2">¿Para qué sirve?</h3>
+      <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+        <li>Recuperar archivos de una laptop vieja o dañada.</li>
+        <li>Usar como disco externo para respaldar fotos, videos o documentos.</li>
+        <li>Acelerar tu PC: instala un SSD nuevo y guarda el viejo como externo.</li>
+      </ul>
+      <p class="text-blue-600 font-medium">✔ Fácil de usar: solo conecta tu disco y listo.</p>
+    </section>
+
+    <!-- Producto 2 -->
+    <section class="bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-green-500">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-3">🚀 SSD 128GB para Laptop</h2>
+      <img src="https://placehold.co/400x200/blue/white?text=SSD+128GB" alt="SSD 128GB" class="w-full md:w-1/2 rounded-lg mb-4" />
+      <h3 class="font-bold text-gray-700 mb-2">¿Qué es?</h3>
+      <p class="text-gray-700 mb-4">
+        Un <strong>disco sólido (SSD)</strong> de 128GB que reemplaza al disco duro lento de tu laptop.
+      </p>
+      <h3 class="font-bold text-gray-700 mb-2">¿Para qué sirve?</h3>
+      <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+        <li>¡Tu laptop se vuelve 3 veces más rápida!</li>
+        <li>Arranca en segundos y abre programas al instante.</li>
+        <li>Ideal para estudiar, trabajar o navegar sin lentitud.</li>
+      </ul>
+      <p class="text-green-600 font-medium">💡 Incluye cajita USB GRATIS si lo compras junto con la cajita.</p>
+    </section>
+
+    <!-- Producto 3 -->
+    <section class="bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-orange-500">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-3">🔌 Cable Conversor TP-Link 5V a 9V</h2>
+      <img src="https://placehold.co/400x200/green/white?text=Cable+5V-a-9V" alt="Cable conversor" class="w-full md:w-1/2 rounded-lg mb-4" />
+      <h3 class="font-bold text-gray-700 mb-2">¿Qué es?</h3>
+      <p class="text-gray-700 mb-4">
+        Un <strong>cable regulador de voltaje</strong> que convierte de 5V a 9V, ideal para alimentar dispositivos que lo necesitan.
+      </p>
+      <h3 class="font-bold text-gray-700 mb-2">¿Para qué sirve?</h3>
+      <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+        <li>Alimentar routers, cámaras de seguridad o puntos de red que requieren 9V.</li>
+        <li>Reemplazar cargadores perdidos o dañados.</li>
+        <li>Evita dañar tus dispositivos con el voltaje incorrecto.</li>
+      </ul>
+      <p class="text-orange-600 font-medium">⚡ Seguro y duradero: con protección contra sobrecarga.</p>
+    </section>
+
+    <!-- CTA Final -->
+    <div class="text-center mt-10">
+      <p class="text-lg text-gray-700 mb-6">
+        ¿Tenés dudas sobre cuál producto necesitás?
+      </p>
+      <a
+        href="https://wa.me/595983539322?text=Hola!%20Tengo%20una%20pregunta%20sobre%20tus%20productos"
+        target="_blank"
+        rel="noopener"
+        class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-3 rounded-full transition transform hover:scale-105"
+      >
+        📲 Preguntame por WhatsApp
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
