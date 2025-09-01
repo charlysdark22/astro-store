@@ -5,69 +5,60 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { createClient } from '@supabase/supabase-js';
 
-// Obtener variables de entorno
+// Configuración de Supabase
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
-
-// Crear cliente de Supabase
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Título de la página
+// Datos de la página
 const title = "3 EN 1 TECNO - Tecnología al mejor precio";
+const whatsappNumber = "5353932292"; // Formato: 595 + número sin 0 inicial (ej: 0983 → 983)
 
 // Cargar productos desde Supabase
 const { data: productos, error } = await supabase
   .from('productos')
-  .select('*')
+  .select('id, nombre, precio, categoria, descripcion, imagen_url')
   .order('precio', { ascending: true });
 
-if (error) {
-  console.error('Error al cargar productos:', error);
-}
+if (error) console.error('Error al cargar productos:', error);
 
-
-// Función para formatear precios en Guaraníes
-const formatPrice = (p) => {
-  // Formatea el número con puntos como separador de miles, sin símbolo
-  const formattedNumber = new Intl.NumberFormat('es-PY', {
+// Formatear precios como "5.000 MN"
+const formatPrice = (precio) => {
+  return new Intl.NumberFormat('es-PY', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(p);
-  return `${formattedNumber} MN`; // Ej: "5.000 MN"
+  }).format(precio) + ' MN';
 };
-
-// Número de WhatsApp (con código de país, ej: +595 983 539322 → 595983539322)
-const whatsappNumber = "595983539322"; // ⚠️ Reemplaza con tu número real
 ---
 
 <Layout title={title}>
   <Header />
 
   <main class="container mx-auto px-4 py-8">
-    <!-- Sección de promoción principal -->
+    <!-- Sección principal -->
     <section class="bg-gradient-to-r from-red-600 to-orange-500 text-white text-center py-12 rounded-lg shadow-lg mb-10">
       <h1 class="text-4xl md:text-5xl font-bold">🔥 ¡3 EN 1 TECNO! 🔥</h1>
       <p class="text-xl md:text-2xl mb-6">¡Precios imbatibles en tecnología!</p>
       <p class="text-lg opacity-90">Aprovecha estas ofertas por tiempo limitado</p>
     </section>
 
-    <!-- Mensaje de error si falla la carga -->
+    <!-- Mensaje de error -->
     {error && (
       <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-8 rounded">
         <p><strong>⚠️ Error:</strong> No se pudieron cargar los productos. Intenta más tarde.</p>
       </div>
     )}
 
-    <!-- Productos -->
+    <!-- Lista de productos -->
     <section class="mb-12">
       <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Productos Destacados</h2>
 
-      {productos?.length === 0 ? (
+      {(!productos || productos.length === 0) ? (
         <p class="text-center text-gray-600">No hay productos disponibles por ahora.</p>
       ) : (
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {productos?.map((producto) => (
-                <div key={producto.id} class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+          {productos.map((producto) => (
+            <div key={producto.id} class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
               <img
                 src={producto.imagen_url}
                 alt={producto.nombre}
@@ -77,16 +68,14 @@ const whatsappNumber = "595983539322"; // ⚠️ Reemplaza con tu número real
               <div class="p-6 flex-grow">
                 <h3 class="text-xl font-semibold text-gray-800">{producto.nombre}</h3>
                 <span class="text-sm text-blue-600 font-medium">{producto.categoria}</span>
-                <p class="text-gray-600 text-sm mt-2">{producto.descripcion}</p>
+                <p class="text-gray-600 text-sm mt-2 line-clamp-2">{producto.descripcion}</p>
                 <p class="text-red-600 font-bold text-lg mt-3">{formatPrice(producto.precio)}</p>
               </div>
               <div class="p-6 pt-0">
                 <a
-                  href={`https://wa.me/${whatsappNumber}?text=Hola!%20Quiero%20comprar%20el%20producto:%20${encodeURIComponent(
-                    producto.nombre
-                  )}`}
+                  href={`https://wa.me/${whatsappNumber}?text=Hola!%20Quiero%20comprar%20el%20producto:%20${encodeURIComponent(producto.nombre)}`}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   class="block w-full text-center bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold"
                 >
                   📲 Comprar por WhatsApp
@@ -98,14 +87,14 @@ const whatsappNumber = "595983539322"; // ⚠️ Reemplaza con tu número real
       )}
     </section>
 
-    <!-- Llamado a la acción final -->
+    <!-- CTA Final -->
     <section class="bg-blue-900 text-white text-center py-10 rounded-lg shadow-md">
       <h2 class="text-2xl font-bold mb-4">¿Qué necesitás?</h2>
       <p class="text-lg mb-6">Escribime ahora y te ayudo con tu compra</p>
       <a
         href={`https://wa.me/${whatsappNumber}?text=Hola!%20Vine%20de%20tu%20web%20y%20quiero%20más%20info`}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-3 rounded-full transition transform hover:scale-105"
       >
         💬 Chatear por WhatsApp
