@@ -1,88 +1,106 @@
 ---
-// src/pages/acerca.astro
+// src/pages/contacto.astro
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const title = "¿Cómo funcionan los productos? - 3 EN 1 TECNO";
+const title = "Contacto - 3 EN 1 TECNO";
+const whatsappNumber = "595983539322";
+const whatsappLink = `https://wa.me/${whatsappNumber}`;
 ---
 
 <Layout title={title}>
   <Header />
 
-  <main class="container mx-auto px-4 py-10 max-w-4xl">
-    <h1 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">
-      🔧 ¿Para qué sirve cada producto?
-    </h1>
-    <p class="text-center text-lg text-gray-600 mb-12">
-      Te explicamos cada uno para que compres con confianza.
-    </p>
-
-    <!-- Producto 1 -->
-    <section class="bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-blue-500">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-3">💾 Cajita para Disco de Laptop/SSD</h2>
-      <img src="https://placehold.co/400x200/gray/white?text=Cajita+USB" alt="Cajita USB" class="w-full md:w-1/2 rounded-lg mb-4" />
-      <h3 class="font-bold text-gray-700 mb-2">¿Qué es?</h3>
-      <p class="text-gray-700 mb-4">
-        Es un <strong>adaptador USB</strong> que convierte tu disco duro o SSD interno en una unidad externa.
+  <main class="container mx-auto px-6 py-12 max-w-4xl">
+    <!-- Sección principal -->
+    <section class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">💬 ¿Tienes una pregunta?</h1>
+      <p class="text-lg text-gray-600 mb-6">
+        Estoy aquí para ayudarte con tu compra, asesorarte o resolver cualquier duda técnica.
       </p>
-      <h3 class="font-bold text-gray-700 mb-2">¿Para qué sirve?</h3>
-      <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
-        <li>Recuperar archivos de una laptop vieja o dañada.</li>
-        <li>Usar como disco externo para respaldar fotos, videos o documentos.</li>
-        <li>Acelerar tu PC: instala un SSD nuevo y guarda el viejo como externo.</li>
-      </ul>
-      <p class="text-blue-600 font-medium">✔ Fácil de usar: solo conecta tu disco y listo.</p>
+      <p class="text-sm text-gray-500">
+        Escríbeme por WhatsApp y te responderé al instante.
+      </p>
     </section>
 
-    <!-- Producto 2 -->
-    <section class="bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-green-500">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-3">🚀 SSD 128GB para Laptop</h2>
-      <img src="https://placehold.co/400x200/blue/white?text=SSD+128GB" alt="SSD 128GB" class="w-full md:w-1/2 rounded-lg mb-4" />
-      <h3 class="font-bold text-gray-700 mb-2">¿Qué es?</h3>
-      <p class="text-gray-700 mb-4">
-        Un <strong>disco sólido (SSD)</strong> de 128GB que reemplaza al disco duro lento de tu laptop.
-      </p>
-      <h3 class="font-bold text-gray-700 mb-2">¿Para qué sirve?</h3>
-      <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
-        <li>¡Tu laptop se vuelve 3 veces más rápida!</li>
-        <li>Arranca en segundos y abre programas al instante.</li>
-        <li>Ideal para estudiar, trabajar o navegar sin lentitud.</li>
-      </ul>
-      <p class="text-green-600 font-medium">💡 Incluye cajita USB GRATIS si lo compras junto con la cajita.</p>
+    <!-- Botón principal de WhatsApp -->
+    <div class="text-center mb-16">
+      <a
+        href={`${whatsappLink}?text=Hola!%20Vine%20de%20tu%20web%20y%20tengo%20una%20pregunta`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105"
+      >
+        <span class="text-2xl">📲</span>
+        Chatear por WhatsApp
+      </a>
+    </div>
+
+    <!-- ¿Por qué contactar por WhatsApp? -->
+    <section class="bg-white p-8 rounded-2xl shadow-md border border-gray-200 mb-12">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">🔒 ¿Por qué usamos WhatsApp?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
+        <div class="flex items-start gap-3">
+          <span class="text-green-500 text-xl">✅</span>
+          <div>
+            <strong>Privacidad y seguridad</strong>
+            <p class="text-sm mt-1">Tus mensajes están cifrados de extremo a extremo. Solo tú y yo podemos verlos.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-green-500 text-xl">💬</span>
+          <div>
+            <strong>Respuesta inmediata</strong>
+            <p class="text-sm mt-1">Te respondo en minutos, sin esperas ni robots.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-green-500 text-xl">📷</span>
+          <div>
+            <strong>Comparte fotos y videos</strong>
+            <p class="text-sm mt-1">Puedes enviarme una foto de tu equipo para que te asesore mejor.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-green-500 text-xl">📱</span>
+          <div>
+            <strong>Lo usas todos los días</strong>
+            <p class="text-sm mt-1">No necesitas crear cuentas nuevas ni descargar apps extra.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Producto 3 -->
-    <section class="bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-orange-500">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-3">🔌 Cable Conversor TP-Link 5V a 9V</h2>
-      <img src="https://placehold.co/400x200/green/white?text=Cable+5V-a-9V" alt="Cable conversor" class="w-full md:w-1/2 rounded-lg mb-4" />
-      <h3 class="font-bold text-gray-700 mb-2">¿Qué es?</h3>
+    <!-- Información adicional -->
+    <section class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-2xl mb-12">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">📬 Otras formas de contacto</h2>
       <p class="text-gray-700 mb-4">
-        Un <strong>cable regulador de voltaje</strong> que convierte de 5V a 9V, ideal para alimentar dispositivos que lo necesitan.
+        Aunque prefiero WhatsApp, también puedes contactarme por:
       </p>
-      <h3 class="font-bold text-gray-700 mb-2">¿Para qué sirve?</h3>
-      <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
-        <li>Alimentar routers, cámaras de seguridad o puntos de red que requieren 9V.</li>
-        <li>Reemplazar cargadores perdidos o dañados.</li>
-        <li>Evita dañar tus dispositivos con el voltaje incorrecto.</li>
+      <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+        <li><strong>Correo electrónico:</strong> <a href="carlosaguilardark22@gmail.com" class="text-blue-600 hover:underline">carlosaguilardark22@gmail.com</a></li>
+        <li><strong>Horario de atención:</strong> Lunes a Sábado, 8:00 AM – 8:00 PM</li>
+       
       </ul>
-      <p class="text-orange-600 font-medium">⚡ Seguro y duradero: con protección contra sobrecarga.</p>
+      <p class="text-sm text-gray-500 italic">
+        Nota: Para compras y consultas técnicas, WhatsApp es la forma más rápida y segura.
+      </p>
     </section>
 
     <!-- CTA Final -->
-    <div class="text-center mt-10">
-      <p class="text-lg text-gray-700 mb-6">
-        ¿Tenés dudas sobre cuál producto necesitás?
-      </p>
+    <section class="text-center">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">¿Listo para tu compra?</h2>
+      <p class="text-gray-600 mb-6">Escríbeme ahora y te ayudo a elegir lo mejor para tu necesidad.</p>
       <a
-        href="https://wa.me/595983539322?text=Hola!%20Tengo%20una%20pregunta%20sobre%20tus%20productos"
+        href={`${whatsappLink}?text=Hola!%20Quiero%20hacer%20una%20compra`}
         target="_blank"
-        rel="noopener"
-        class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-3 rounded-full transition transform hover:scale-105"
+        rel="noopener noreferrer"
+        class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-full transition"
       >
-        📲 Preguntame por WhatsApp
+        🔥 Ir a comprar
       </a>
-    </div>
+    </section>
   </main>
 
   <Footer />

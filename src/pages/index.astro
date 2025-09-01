@@ -5,101 +5,179 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { createClient } from '@supabase/supabase-js';
 
-// Configuración de Supabase
+// Título
+const title = "3 EN 1 TECNO - Tecnología al mejor precio";
+const whatsappNumber = "5353932292";
+const whatsappLink = `https://wa.me/${whatsappNumber}`;
+
+// ✅ Validar que las variables de entorno existan
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Datos de la página
-const title = "3 EN 1 TECNO - Tecnología al mejor precio";
-const whatsappNumber = "5353932292"; // Formato: 595 + número sin 0 inicial (ej: 0983 → 983)
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn('⚠️ Variables de entorno de Supabase no configuradas');
+}
 
-// Cargar productos desde Supabase
-const { data: productos, error } = await supabase
-  .from('productos')
-  .select('id, nombre, precio, categoria, descripcion, imagen_url')
-  .order('precio', { ascending: true });
+// ✅ Solo crear cliente si hay variables
+const supabase = supabaseUrl && supabaseAnonKey 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
-if (error) console.error('Error al cargar productos:', error);
+// Estado inicial
+let productos = [];
+let error = null;
+let loading = true;
 
-// Formatear precios como "5.000 MN"
-const formatPrice = (precio) => {
-  return new Intl.NumberFormat('es-PY', {
+// ✅ Cargar productos solo si hay cliente
+if (supabase) {
+  const {  data, error: fetchError } = await supabase
+    .from('productos')
+    .select('id, nombre, precio, categoria, descripcion, imagen_url')
+    .order('precio', { ascending: true });
+
+  if (fetchError) {
+    error = fetchError;
+    console.error('❌ Error al cargar productos:', fetchError);
+  } else {
+    productos = data;
+  }
+} else {
+  error = { message: 'No se configuraron las variables de Supabase' };
+}
+
+// Apagar "loading"
+loading = false;
+
+// Formatear precios
+const formatPrice = (precio) =>
+  new Intl.NumberFormat('es-PY', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(precio) + ' MN';
-};
 ---
 
 <Layout title={title}>
   <Header />
 
   <main class="container mx-auto px-4 py-8">
-    <!-- Sección principal -->
-    <section class="bg-gradient-to-r from-red-600 to-orange-500 text-white text-center py-12 rounded-lg shadow-lg mb-10">
-      <h1 class="text-4xl md:text-5xl font-bold">🔥 ¡3 EN 1 TECNO! 🔥</h1>
-      <p class="text-xl md:text-2xl mb-6">¡Precios imbatibles en tecnología!</p>
-      <p class="text-lg opacity-90">Aprovecha estas ofertas por tiempo limitado</p>
+    <!-- Hero -->
+    <section class="relative bg-gradient-to-br from-red-500 via-orange-500 to-yellow-400 text-white rounded-3xl overflow-hidden shadow-2xl mb-12 pt-16 pb-20 px-6 text-center">
+      <div class="absolute inset-0 opacity-10">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <circle cx="10%" cy="20%" r="5" fill="white" />
+          <circle cx="90%" cy="30%" r="3" fill="white" />
+          <circle cx="50%" cy="80%" r="4" fill="white" />
+        </svg>
+      </div>
+      <div class="relative z-10">
+        <span class="inline-block bg-white bg-opacity-20 text-white text-sm font-semibold px-4 py-1 rounded-full mb-4">
+          🔥 Ofertas por tiempo limitado
+        </span>
+        <h1 class="text-4xl md:text-6xl font-black leading-tight mb-4">3 EN 1 TECNO</h1>
+        <p class="text-xl md:text-2xl opacity-95 mb-6 max-w-2xl mx-auto">
+          Tecnología rápida, segura y al mejor precio del país
+        </p>
+        <a
+          href={`${whatsappLink}?text=Hola!%20Vine%20de%20tu%20web%20y%20quiero%20más%20info`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-green-500 hover:bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105"
+        >
+          💬 Chatear ahora
+        </a>
+      </div>
     </section>
 
-    <!-- Mensaje de error -->
-    {error && (
-      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-8 rounded">
-        <p><strong>⚠️ Error:</strong> No se pudieron cargar los productos. Intenta más tarde.</p>
+    <!-- Mensaje de estado -->
+    {loading && (
+      <div class="text-center py-10">
+        <p class="text-xl text-gray-700">🔄 Cargando productos...</p>
       </div>
     )}
 
-    <!-- Lista de productos -->
-    <section class="mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Productos Destacados</h2>
+    {error && (
+      <div class="bg-red-50 border border-red-200 text-red-700 p-6 mb-8 rounded-xl text-center animate-pulse">
+        <p><strong>⚠️ Error:</strong> No se pudieron cargar los productos.</p>
+        <p class="text-sm mt-2">Por favor, intenta más tarde o escríbeme por WhatsApp.</p>
+        <a
+          href={`${whatsappLink}?text=Hola!%20Tengo%20un%20problema%20en%20tu%20web`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-block bg-green-500 text-white px-6 py-2 rounded-full text-sm"
+        >
+          📲 Informar el error
+        </a>
+      </div>
+    )}
 
-      {(!productos || productos.length === 0) ? (
-        <p class="text-center text-gray-600">No hay productos disponibles por ahora.</p>
-      ) : (
+    <!-- Productos -->
+    {!loading && !error && (!productos || productos.length === 0) && (
+      <div class="text-center py-10">
+        <p class="text-xl text-gray-600">No hay productos disponibles por ahora.</p>
+        <a
+          href={whatsappLink}
+          target="_blank"
+          class="mt-4 text-green-600 font-bold"
+        >
+          Escríbeme para consultar
+        </a>
+      </div>
+    )}
+
+    {!loading && !error && productos.length > 0 && (
+      <section class="mb-16">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-800 mb-2">Productos Destacados</h2>
+          <p class="text-gray-600">Tecnología que acelera tu vida digital</p>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {productos.map((producto) => (
-            <div key={producto.id} class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <article key={producto.id} class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group">
               <img
                 src={producto.imagen_url}
                 alt={producto.nombre}
-                class="w-full h-48 object-cover"
+                class="w-full h-48 object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
               />
-              <div class="p-6 flex-grow">
-                <h3 class="text-xl font-semibold text-gray-800">{producto.nombre}</h3>
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-800">{producto.nombre}</h3>
                 <span class="text-sm text-blue-600 font-medium">{producto.categoria}</span>
                 <p class="text-gray-600 text-sm mt-2 line-clamp-2">{producto.descripcion}</p>
-                <p class="text-red-600 font-bold text-lg mt-3">{formatPrice(producto.precio)}</p>
-              </div>
-              <div class="p-6 pt-0">
+                <p class="text-red-600 font-extrabold text-lg mt-3">{formatPrice(producto.precio)}</p>
                 <a
-                  href={`https://wa.me/${whatsappNumber}?text=Hola!%20Quiero%20comprar%20el%20producto:%20${encodeURIComponent(producto.nombre)}`}
+                  href={`${whatsappLink}?text=Hola!%20Quiero%20comprar%20el%20producto:%20${encodeURIComponent(producto.nombre)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="block w-full text-center bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold"
+                  class="mt-4 w-full block text-center bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 rounded-lg font-bold hover:from-green-600 hover:to-emerald-700 transition"
                 >
                   📲 Comprar por WhatsApp
                 </a>
               </div>
-            </div>
+            </article>
           ))}
         </div>
-      )}
-    </section>
+      </section>
+    )}
 
     <!-- CTA Final -->
-    <section class="bg-blue-900 text-white text-center py-10 rounded-lg shadow-md">
-      <h2 class="text-2xl font-bold mb-4">¿Qué necesitás?</h2>
-      <p class="text-lg mb-6">Escribime ahora y te ayudo con tu compra</p>
+    <section class="bg-gradient-to-br from-blue-900 to-indigo-900 text-white rounded-3xl text-center py-16 px-6 mb-12">
+      <h2 class="text-3xl font-bold mb-4">¿Listo para mejorar tu tecnología?</h2>
+      <p class="text-xl opacity-90 mb-8 max-w-lg mx-auto">
+        Escríbeme ahora y te respondo al instante
+      </p>
       <a
-        href={`https://wa.me/${whatsappNumber}?text=Hola!%20Vine%20de%20tu%20web%20y%20quiero%20más%20info`}
+        href={`${whatsappLink}?text=Hola!%20Vine%20de%20tu%20web%20y%20quiero%20más%20info`}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-3 rounded-full transition transform hover:scale-105"
+        class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105 mx-auto max-w-xs"
       >
-        💬 Chatear por WhatsApp
+        <span>💬</span> Chatear por WhatsApp
       </a>
     </section>
+
+    <footer class="text-center text-gray-500 text-sm mb-8">
+      <p>© {new Date().getFullYear()} 3 EN 1 TECNO. Todos los derechos reservados.</p>
+    </footer>
   </main>
 
   <Footer />

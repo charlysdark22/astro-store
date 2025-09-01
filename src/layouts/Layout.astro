@@ -13,23 +13,115 @@ const { title } = Astro.props;
 <html lang="es" class="antialiased">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <ViewTransitions />
+    <!-- Favicon opcional -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Preload de fuentes si usas personalizadas -->
   </head>
-  <body class="bg-gray-100 text-gray-800">
-    <header class="bg-gray-900 text-white p-4 shadow-lg">
-      <nav class="container mx-auto flex justify-between items-center">
-        <a href="/" class="text-2xl font-bold tracking-tight">Tienda de PCs</a>
-        <ul class="flex space-x-4">
-          <li><a href="/" class="hover:text-amber-400 transition-colors">Inicio</a></li>
-          <li><a href="/contacto" class="hover:text-amber-400 transition-colors">Acerca de</a></li>
+  <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+    <header class="bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-lg">
+      <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="/" class="text-2xl md:text-3xl font-black tracking-tight flex items-center gap-2">
+          🔥 3 EN 1 TECNO
+        </a>
+
+        <!-- Navegación para escritorio -->
+        <ul class="hidden md:flex space-x-8">
+          <li>
+            <a 
+              href="/" 
+              class="font-medium hover:text-yellow-200 transition-colors duration-200"
+            >
+              Inicio
+            </a>
+          </li>
+          <li>
+            <a 
+              href="/acerca" 
+              class="font-medium hover:text-yellow-200 transition-colors duration-200"
+            >
+              Acerca de
+            </a>
+          </li>
+          <li>
+            <a 
+              href="/contacto" 
+              class="font-medium hover:text-yellow-200 transition-colors duration-200"
+            >
+              Contacto
+            </a>
+          </li>
         </ul>
+
+        <!-- Botón de WhatsApp en escritorio -->
+        <a 
+          href="https://wa.me/5353932292?text=Hola!%20Vine%20de%20tu%20web" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="hidden md:block bg-green-500 hover:bg-green-600 text-white font-bold text-sm px-4 py-2 rounded-full transition transform hover:scale-105"
+        >
+          💬 WhatsApp
+        </a>
       </nav>
+
+      <!-- Menú móvil -->
+      <div class="md:hidden bg-red-700 px-6 py-2">
+        <ul class="flex flex-col space-y-3">
+          <li>
+            <a 
+              href="/" 
+              class="block py-2 font-medium hover:text-yellow-200"
+            >
+              🏠 Inicio
+            </a>
+          </li>
+          <li>
+            <a 
+              href="/acerca" 
+              class="block py-2 font-medium hover:text-yellow-200"
+            >
+              ℹ️ Acerca de
+            </a>
+          </li>
+          <li>
+            <a 
+              href="/contacto" 
+              class="block py-2 font-medium hover:text-yellow-200"
+            >
+              📞 Contacto
+            </a>
+          </li>
+          <li>
+            <a 
+              href="https://wa.me/5353932292?text=Hola!%20Vine%20de%20tu%20web" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="block py-2 text-center bg-green-500 text-white font-bold rounded hover:bg-green-600"
+            >
+              💬 Chatear por WhatsApp
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
 
-    <main class="container mx-auto p-8">
+    <!-- Contenido principal -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
       <slot />
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 mt-auto">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-lg font-semibold">🔥 3 EN 1 TECNO</p>
+        <p class="text-sm mt-2">Tecnología rápida, segura y al mejor precio del Paraguay.</p>
+        <p class="text-xs mt-4 opacity-75">
+          © {new Date().getFullYear()} 3 EN 1 TECNO. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
