@@ -1,8 +1,14 @@
-# static.yaml
 services:
   - type: web
     name: astro-store
+    env: static
     buildCommand: npm run build
     publishPath: dist
-    env: static
+    envVars:
+      - key: PUBLIC_SUPABASE_URL
+        value: https://aqcllfrblccvktyncfcd.supabase.co
+      - key: PUBLIC_SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxY2xsZnJibGNjdmt0eW5jZmNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1NjY1MzEsImV4cCI6MjA3MjE0MjUzMX0.FFJehSlwqA7vYoP8HkJatiemIE7wwOZi5t7pytaav58
     plan: free
+
+
