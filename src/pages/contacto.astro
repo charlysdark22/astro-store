@@ -7,100 +7,99 @@ import Footer from '../components/Footer.astro';
 const title = "Contacto - 3 EN 1 TECNO";
 const whatsappNumber = "595983539322";
 const whatsappLink = `https://wa.me/${whatsappNumber}`;
+const email = "carlosaguilardark22@gmail.com";
+const emailSubject = "Consulta desde la web de 3 EN 1 TECNO";
+const emailBody = "Hola!%0A%0AVine%20de%20tu%20web%20y%20tengo%20una%20pregunta%20sobre%20tus%20productos%20o%20servicios.%0A%0A(Mensaje%20aquí)";
 ---
 
 <Layout title={title}>
   <Header />
 
   <main class="container mx-auto px-6 py-12 max-w-4xl">
-    <!-- Sección principal -->
+    <!-- Título -->
     <section class="text-center mb-12">
-      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">💬 ¿Tienes una pregunta?</h1>
-      <p class="text-lg text-gray-600 mb-6">
-        Estoy aquí para ayudarte con tu compra, asesorarte o resolver cualquier duda técnica.
-      </p>
-      <p class="text-sm text-gray-500">
-        Escríbeme por WhatsApp y te responderé al instante.
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">📬 Contáctame</h1>
+      <p class="text-lg text-gray-600">
+        Escríbeme por WhatsApp o envíame un correo. Estoy aquí para ayudarte.
       </p>
     </section>
 
-    <!-- Botón principal de WhatsApp -->
-    <div class="text-center mb-16">
+    <!-- Opción 1: WhatsApp -->
+    <div class="bg-green-50 border border-green-200 rounded-2xl p-8 mb-8 text-center shadow-sm">
+      <h2 class="text-2xl font-bold text-green-800 mb-4">💬 Chatear por WhatsApp</h2>
+      <p class="text-gray-700 mb-6">
+        La forma más rápida y segura de contactarme. Ideal para consultas, compras y soporte técnico.
+      </p>
       <a
         href={`${whatsappLink}?text=Hola!%20Vine%20de%20tu%20web%20y%20tengo%20una%20pregunta`}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105"
+        class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-3 rounded-full transition transform hover:scale-105"
       >
-        <span class="text-2xl">📲</span>
-        Chatear por WhatsApp
+        <span>📲</span> Abrir WhatsApp
       </a>
     </div>
 
-    <!-- ¿Por qué contactar por WhatsApp? -->
-    <section class="bg-white p-8 rounded-2xl shadow-md border border-gray-200 mb-12">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">🔒 ¿Por qué usamos WhatsApp?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
+    <!-- Opción 2: Correo electrónico -->
+    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-8 mb-8 text-center shadow-sm">
+      <h2 class="text-2xl font-bold text-blue-800 mb-4">📧 Enviar un correo</h2>
+      <p class="text-gray-700 mb-6">
+        Si prefieres escribir por correo, haz clic en el botón y se abrirá tu cliente de email.
+      </p>
+      <a
+        href={`mailto:${email}?subject=${emailSubject}&body=${emailBody}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-3 bg-blue-500 hover:bg-blue-600 text-white font-bold px-8 py-3 rounded-full transition"
+      >
+        <span>✉️</span> Enviar correo
+      </a>
+      <p class="text-sm text-gray-500 mt-4">
+        Se abrirá con destino a: <strong>{email}</strong>
+      </p>
+    </div>
+
+    <!-- ¿Por qué usar WhatsApp? -->
+    <section class="bg-white p-8 rounded-2xl shadow-md border border-gray-200 mb-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">🔒 ¿Por qué prefiero WhatsApp?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700 text-sm">
         <div class="flex items-start gap-3">
           <span class="text-green-500 text-xl">✅</span>
           <div>
-            <strong>Privacidad y seguridad</strong>
-            <p class="text-sm mt-1">Tus mensajes están cifrados de extremo a extremo. Solo tú y yo podemos verlos.</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="text-green-500 text-xl">💬</span>
-          <div>
             <strong>Respuesta inmediata</strong>
-            <p class="text-sm mt-1">Te respondo en minutos, sin esperas ni robots.</p>
+            <p>Te respondo en minutos, sin esperas.</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
           <span class="text-green-500 text-xl">📷</span>
           <div>
-            <strong>Comparte fotos y videos</strong>
-            <p class="text-sm mt-1">Puedes enviarme una foto de tu equipo para que te asesore mejor.</p>
+            <strong>Envía fotos y videos</strong>
+            <p>Puedes mostrarme tu equipo para mejor asesoramiento.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-green-500 text-xl">🔐</span>
+          <div>
+            <strong>Cifrado de extremo a extremo</strong>
+            <p>Tus mensajes son privados.</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
           <span class="text-green-500 text-xl">📱</span>
           <div>
             <strong>Lo usas todos los días</strong>
-            <p class="text-sm mt-1">No necesitas crear cuentas nuevas ni descargar apps extra.</p>
+            <p>No necesitas apps extra.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Información adicional -->
-    <section class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-2xl mb-12">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">📬 Otras formas de contacto</h2>
-      <p class="text-gray-700 mb-4">
-        Aunque prefiero WhatsApp, también puedes contactarme por:
+    <!-- Nota final -->
+    <div class="text-center text-gray-600">
+      <p>
+        <strong>Nota:</strong> Para compras y consultas técnicas, WhatsApp es la opción más rápida.
       </p>
-      <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
-        <li><strong>Correo electrónico:</strong> <a href="carlosaguilardark22@gmail.com" class="text-blue-600 hover:underline">carlosaguilardark22@gmail.com</a></li>
-        <li><strong>Horario de atención:</strong> Lunes a Sábado, 8:00 AM – 8:00 PM</li>
-       
-      </ul>
-      <p class="text-sm text-gray-500 italic">
-        Nota: Para compras y consultas técnicas, WhatsApp es la forma más rápida y segura.
-      </p>
-    </section>
-
-    <!-- CTA Final -->
-    <section class="text-center">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">¿Listo para tu compra?</h2>
-      <p class="text-gray-600 mb-6">Escríbeme ahora y te ayudo a elegir lo mejor para tu necesidad.</p>
-      <a
-        href={`${whatsappLink}?text=Hola!%20Quiero%20hacer%20una%20compra`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-full transition"
-      >
-        🔥 Ir a comprar
-      </a>
-    </section>
+    </div>
   </main>
 
   <Footer />
